@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { supabase } from "@/lib/supabase"
+import supabase from "@/lib/supabase"
 import { Wallet, Sparkles, Loader2, Eye, EyeOff, ArrowRight, CheckCircle2 } from "lucide-react"
 
 type Mode = "login" | "signup"
