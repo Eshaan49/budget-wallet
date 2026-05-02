@@ -19,9 +19,9 @@ A modern AI-powered personal finance tracker that helps users manage expenses, v
 
 ## 📸 Screenshots
 
-![Dashboard](screenshots/dashboard.png)
-![Magic Add](screenshots/magic-add.png)
-![Insights](screenshots/insights.png)
+![Dashboard](project/screenshots/dashboard.png)
+![Magic Add](project/screenshots/magic-add.png)
+![Insights](project/screenshots/insights.png)
 
 ## ⚙️ Run Locally
 
