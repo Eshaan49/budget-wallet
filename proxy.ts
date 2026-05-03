@@ -30,14 +30,13 @@ export async function proxy(request: NextRequest) {
   }
 
   // Redirect unauthenticated users to login
-  if (!user && pathname !== '/login' && pathname !== '/signup') {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
+  if (!user && pathname !== '/auth') {
+  return NextResponse.redirect(new URL('/auth', request.url))
+}
 
-  // Redirect authenticated users away from login/signup
-  if (user && (pathname === '/login' || pathname === '/signup')) {
-    return NextResponse.redirect(new URL('/', request.url))
-  }
+if (user && pathname === '/auth') {
+  return NextResponse.redirect(new URL('/', request.url))
+}
 
   return supabaseResponse
 }
