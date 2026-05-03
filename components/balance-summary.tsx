@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { TrendingUp, TrendingDown, CreditCard } from "lucide-react"
+import { useCurrency } from "@/lib/currency-context"
 
 type BalanceSummaryProps = {
   balance: number
@@ -9,9 +10,6 @@ type BalanceSummaryProps = {
   expenses: number
   loading?: boolean
 }
-
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(n)
 
 const cardVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -23,6 +21,8 @@ const cardVariants = {
 }
 
 export function BalanceSummary({ balance, income, expenses, loading }: BalanceSummaryProps) {
+  const { fmt } = useCurrency()
+
   const cards = [
     {
       label: "Total Balance",
@@ -96,12 +96,5 @@ export function BalanceSummary({ balance, income, expenses, loading }: BalanceSu
         )
       })}
     </div>
-  )
-}
-
-// Shimmer fallback (inline for simplicity)
-function shimmer() {
-  return (
-    <div className="h-8 w-28 rounded-lg bg-white/5 animate-pulse" />
   )
 }

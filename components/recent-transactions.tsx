@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowUpRight, ArrowDownRight, Trash2 } from "lucide-react"
 import type { Transaction } from "@/app/page"
+import { useCurrency } from "@/lib/currency-context"
 
 type Props = {
   transactions: Transaction[]
@@ -10,13 +11,12 @@ type Props = {
   loading?: boolean
 }
 
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(n)
-
 const fmtDate = (d: Date) =>
   new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(d)
 
 export function RecentTransactions({ transactions, onDelete, loading }: Props) {
+  const { fmt } = useCurrency()
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
@@ -49,13 +49,12 @@ export function RecentTransactions({ transactions, onDelete, loading }: Props) {
               <motion.div
                 key={tx.id}
                 layout
-                initial={{ opacity: 0, height: 0, marginBottom: 0 }}
-                animate={{ opacity: 1, height: "auto", marginBottom: 6 }}
-                exit={{ opacity: 0, height: 0, marginBottom: 0, x: -20 }}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0, x: -20 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="group flex items-center gap-3 glass-row rounded-xl px-3 py-2.5 hover:bg-white/[0.06] transition-colors"
               >
-                {/* Icon */}
                 <div
                   className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
                     tx.type === "income" ? "bg-primary/15 ring-1 ring-primary/25" : "bg-destructive/15 ring-1 ring-destructive/25"
@@ -68,7 +67,6 @@ export function RecentTransactions({ transactions, onDelete, loading }: Props) {
                   )}
                 </div>
 
-                {/* Info */}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground truncate leading-tight">
                     {tx.description}
@@ -78,7 +76,6 @@ export function RecentTransactions({ transactions, onDelete, loading }: Props) {
                   </p>
                 </div>
 
-                {/* Amount + Delete */}
                 <div className="flex items-center gap-1.5 shrink-0">
                   <span
                     className={`font-mono text-sm font-semibold ${

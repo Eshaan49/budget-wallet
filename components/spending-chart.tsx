@@ -1,9 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
 import { PieChart, Pie, Cell, Legend } from "recharts"
+import { useCurrency } from "@/lib/currency-context"
 
 type Props = {
   expensesByCategory: Record<string, number>
@@ -17,10 +17,9 @@ const COLORS = [
   "var(--color-chart-5)",
 ]
 
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(n)
-
 export function SpendingChart({ expensesByCategory }: Props) {
+  const { fmt } = useCurrency()
+
   const data = Object.entries(expensesByCategory).map(([name, value], i) => ({
     name,
     value,
