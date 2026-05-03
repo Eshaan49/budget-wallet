@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import supabase from "@/lib/supabase"
+import { getSupabase } from "@/lib/supabase"
 import { Wallet, Sparkles, Loader2, Eye, EyeOff, ArrowRight, CheckCircle2 } from "lucide-react"
 
 type Mode = "login" | "signup"
@@ -16,7 +16,7 @@ export default function AuthPage() {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
-
+const supabase = getSupabase()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
