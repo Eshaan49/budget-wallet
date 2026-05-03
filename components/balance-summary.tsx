@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { TrendingUp, TrendingDown, PiggyBank } from "lucide-react"
+import { TrendingUp, TrendingDown, CreditCard } from "lucide-react"
 
 type BalanceSummaryProps = {
   balance: number
@@ -28,7 +28,7 @@ export function BalanceSummary({ balance, income, expenses, loading }: BalanceSu
       label: "Total Balance",
       value: balance,
       sub: "Available to spend",
-      icon: PiggyBank,
+      icon: CreditCard,
       color: "text-primary",
       bg: "bg-primary/10",
       ring: "ring-primary/25",
