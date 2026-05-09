@@ -9,6 +9,7 @@ import { SpendingChart } from "@/components/spending-chart"
 import { RecentTransactions } from "@/components/recent-transactions"
 import { BudgetManager } from "@/components/budget-manager"
 import { AIInsights } from "@/components/ai-insights"
+import { FinancialHealthScore } from "@/components/financial-health-score"
 
 export type Transaction = {
   id: string
@@ -88,6 +89,7 @@ export default function Dashboard() {
           <div className="lg:col-span-2 space-y-5">
             <BalanceSummary balance={balance} income={totalIncome} expenses={totalExpenses} loading={loading} />
             <SpendingChart expensesByCategory={expensesByCategory} />
+            <FinancialHealthScore transactions={transactions} />
             <BudgetManager expensesByCategory={expensesByCategory} />
           </div>
 
