@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import { getSupabase } from "@/lib/supabase"
 import { DashboardHeader } from "@/components/dashboard-header"
@@ -30,18 +29,13 @@ export default function Dashboard() {
     supabase.auth.getUser().then(({ data }) => {
       setUserEmail(data.user?.email ?? "")
     })
-
     fetch("/api/transactions")
       .then(r => r.json())
       .then(rows => {
         if (Array.isArray(rows)) {
           setTransactions(rows.map(r => ({
-            id: r.id,
-            description: r.description,
-            amount: r.amount,
-            category: r.category,
-            type: r.type,
-            date: new Date(r.date),
+            id: r.id, description: r.description, amount: r.amount,
+            category: r.category, type: r.type, date: new Date(r.date),
           })))
         }
       })
@@ -84,22 +78,21 @@ export default function Dashboard() {
       <DashboardHeader userEmail={userEmail} />
       <div className="container mx-auto px-4 py-6 max-w-7xl">
         <div className="grid gap-5 lg:grid-cols-3">
-
-          {/* Left column */}
           <div className="lg:col-span-2 space-y-5">
             <BalanceSummary balance={balance} income={totalIncome} expenses={totalExpenses} loading={loading} />
             <SpendingChart expensesByCategory={expensesByCategory} />
             <FinancialHealthScore transactions={transactions} />
             <BudgetManager expensesByCategory={expensesByCategory} />
           </div>
-
-          {/* Right column */}
           <div className="space-y-5">
             <QuickAddTransaction onAddTransaction={addTransaction} />
             <AIInsights />
-            <RecentTransactions transactions={transactions.slice(0, 8)} onDelete={deleteTransaction} loading={loading} />
+            <RecentTransactions
+              transactions={transactions}
+              onDelete={deleteTransaction}
+              loading={loading}
+            />
           </div>
-
         </div>
       </div>
     </main>
